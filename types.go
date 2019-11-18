@@ -22,7 +22,7 @@ import (
 	"math"
 	"strings"
 
-	"github.com/drep-project/drep-chain/common/hexutil"
+	"github.com/drep-project/DREP-Chain/common/hexutil"
 )
 
 // API describes the set of methods offered over the RPC interface
