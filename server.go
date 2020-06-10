@@ -512,6 +512,13 @@ func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Stop here if its Preflighted OPTIONS request
+	if origin := r.Header.Get("Origin"); origin != "" {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers",
+			"Action, Module")
+	}
 
 	// All checks passed, create a codec that reads direct from the request body
 	// untilEOF and writes the response to w and order the server to process a
