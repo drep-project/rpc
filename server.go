@@ -33,8 +33,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/drep-project/dlog"
 	"github.com/drep-project/DREP-Chain/network/p2p/netutil"
+	"github.com/drep-project/dlog"
 
 	"github.com/deckarep/golang-set"
 	"golang.org/x/net/websocket"
@@ -512,14 +512,6 @@ func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Stop here if its Preflighted OPTIONS request
-	if origin := r.Header.Get("Origin"); origin != "" {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-		w.Header().Set("Access-Control-Allow-Headers",
-			"Action, Module")
-	}
-
 	// All checks passed, create a codec that reads direct from the request body
 	// untilEOF and writes the response to w and order the server to process a
 	// single request.
@@ -532,6 +524,9 @@ func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if origin := r.Header.Get("Origin"); origin != "" {
 		ctx = context.WithValue(ctx, "Origin", origin)
+		
+		w.Header().Set("Access-Control-Allow-Origin", "*")             //允许访问所有域
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type") //header的类型
 	}
 
 	body := io.LimitReader(r.Body, maxRequestContentLength)
