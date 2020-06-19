@@ -11,11 +11,11 @@ import (
 
 const (
 	DefaultHTTPHost = "localhost" // Default host interface for the HTTP RPC server
-	DefaultHTTPPort = 15645       // Default TCP port for the HTTP RPC server
+	DefaultHTTPPort = 10085       // Default TCP port for the HTTP RPC server
 	DefaultWSHost   = "localhost" // Default host interface for the websocket RPC server
-	DefaultWSPort   = 15646       // Default TCP port for the websocket RPC server
+	DefaultWSPort   = 10084       // Default TCP port for the websocket RPC server
 	DefaultRestHost = "localhost" // Default host interface for the REST RPC server
-	DefaultRestPort = 55550       // Default TCP port for the REST RPC server
+	DefaultRestPort = 10083       // Default TCP port for the REST RPC server
 )
 
 // HTTPTimeouts represents the configuration params for the HTTP RPC server.
